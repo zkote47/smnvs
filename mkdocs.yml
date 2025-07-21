@@ -1,0 +1,14 @@
+site_name: TIV
+site_url: https://zkote47.github.io/smnvs
+theme:
+  name: material
+  custom_dir: overrides
+  palette:
+    primary: deep purple
+
+site_author: zkote
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
