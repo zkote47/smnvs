@@ -1,4 +1,4 @@
-# **Helm**
+# Helm
 
 Helm — это **менеджер пакетов (package manager)** для Kubernetes, похожий на `apt`/`yum` в Linux или `npm` в Node.js. Он позволяет:
 
