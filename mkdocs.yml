@@ -78,7 +78,7 @@ markdown_extensions:
 
 plugins:
   - search
-  - minify
+
 
 extra_css:
   - stylesheets/extra.css
