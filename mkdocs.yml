@@ -21,6 +21,9 @@ site_url: https://zkote47.github.io/smnvs
 
 theme:
   name: material
+  custom_dir: overrides
+  logo: assets/images/catlogo.svg
+  favicon: assets/images/catlogo.png 
   language: ru
   features:
     - navigation.tabs
@@ -49,7 +52,7 @@ theme:
 
 repo_name: zkote_47/smnvs
 repo_url: https://zkote47.github.io/smnvs
-edit_uri: edit/main/docs/
+# edit_uri: edit/main/docs/
 
 # nav:
 #   - Главная: index.md
@@ -80,8 +83,8 @@ plugins:
   - search
 
 
-extra_css:
-  - stylesheets/extra.css
+# extra_css:
+#   - stylesheets/extra.css
 
 extra:
   social:
