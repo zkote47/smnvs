@@ -1,0 +1,1095 @@
+
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Персональная база знаний моего DevOps-становления">
+      
+      
+        <meta name="author" content="zkote_47">
+      
+      
+        <link rel="canonical" href="https://zkote47.github.io/smnvs/page5%20Prometheus/">
+      
+      
+        <link rel="prev" href="../page4%20ssh/">
+      
+      
+        <link rel="next" href="../page6%20Lens/">
+      
+      
+      <link rel="icon" href="../assets/images/catlogo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Prometheus - TIV</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prometheus" class="md-skip">
+          Перейти к содержанию
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Верхний колонтитул">
+    <a href=".." title="TIV" class="md-header__button md-logo" aria-label="TIV" data-md-component="logo">
+      
+  <img src="../assets/images/catlogo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TIV
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Prometheus
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Тёмная тема"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Тёмная тема" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Светлая тема"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Светлая тема" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Поиск" placeholder="Поиск" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Поиск">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистить" aria-label="Очистить" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализация поиска
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://zkote47.github.io/smnvs" title="Перейти к репозиторию" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zkote_47/smnvs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  zkote`s notes
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../4k8s/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Kubernetes
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../page1%20git%2Bgithub/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Git + GitHub
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../page2/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Методы HTTP
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../page3/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Helm
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../page4%20ssh/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  ssh и Yandex-cloud
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Prometheus
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../page6%20Lens/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Lens
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../page7%20cicd/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  CI-CD
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../page8%20docker/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Docker
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="TIV" class="md-nav__button md-logo" aria-label="TIV" data-md-component="logo">
+      
+  <img src="../assets/images/catlogo.svg" alt="logo">
+
+    </a>
+    TIV
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://zkote47.github.io/smnvs" title="Перейти к репозиторию" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zkote_47/smnvs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    zkote`s notes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4k8s/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page1%20git%2Bgithub/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Git + GitHub
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Методы HTTP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Helm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page4%20ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ssh и Yandex-cloud
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prometheus
+    
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page6%20Lens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lens
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page7%20cicd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CI-CD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page8%20docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="prometheus">Prometheus<a class="headerlink" href="#prometheus" title="Permanent link">&para;</a></h1>
+<h1 id="1-prometheus">1. Теоретическая основа Prometheus<a class="headerlink" href="#1-prometheus" title="Permanent link">&para;</a></h1>
+<p><strong>Prometheus</strong> — это open-source система мониторинга и оповещения.</p>
+<p>Простыми словами: <strong>Prometheus — это "сторож" для ваших приложений и инфраструктуры.</strong> Он постоянно спрашивает "как дела?" у всех ваших сервисов, собирает их ответы (метрики), складывает в свою базу и позволяет вам анализировать эти данные, строить графики и отправлять уведомления, если что-то пошло не так.</p>
+<h2 id="11">1.1 Основные задачи<a class="headerlink" href="#11" title="Permanent link">&para;</a></h2>
+<ul>
+<li>
+<p><strong>Сбор метрик:</strong> Получение числовых данных о работе системы (например, загрузка CPU, потребление памяти, количество запросов к веб-серверу, время ответа базы данных).</p>
+</li>
+<li>
+<p><strong>Хранение метрик:</strong> Все собранные данные хранятся в специальной высокопроизводительной временной базе данных (Time Series DB).</p>
+</li>
+<li>
+<p><strong>Запросы и анализ:</strong> С помощью мощного языка запросов <strong>PromQL</strong> можно извлекать и агрегировать данные, чтобы находить закономерности и проблемы.</p>
+</li>
+<li>
+<p><strong>Визуализация:</strong> Построение графиков и дашбордов на основе собранных данных. Чаще всего для этого используют <strong>Grafana</strong>, которая идеально дружит с Prometheus.</p>
+</li>
+<li>
+<p><strong>Оповещение (Alerting):</strong> Настройка правил, которые при превышении порогового значения (например, "ошибок больше 5%") отправляют уведомления в Slack, Email, Telegram и т.д.</p>
+</li>
+</ul>
+<h2 id="12-prometheus">1.2. Как работает Prometheus? Ключевые принципы<a class="headerlink" href="#12-prometheus" title="Permanent link">&para;</a></h2>
+<p>Новичку важно понять две ключевые концепции:</p>
+<h4 id="a-pull-"><strong>a) Pull-модель (Вытягивание метрик)</strong><a class="headerlink" href="#a-pull-" title="Permanent link">&para;</a></h4>
+<p>Это <strong>главное отличие</strong> Prometheus от многих других систем (например, Zabbix).</p>
+<ul>
+<li>
+<p><strong>Как у других (Push):</strong> Приложения сами отправляют (push) метрики на сервер мониторинга.</p>
+</li>
+<li>
+<p><strong>Как у Prometheus (Pull):</strong> Сам <strong>Prometheus-сервер</strong> периодически обращается (вытягивает, scrape) к списку своих целей (targets) по HTTP и забирает метрики.</p>
+</li>
+</ul>
+<p><strong>Преимущества Pull-модели:</strong></p>
+<ul>
+<li>
+<p>Можно легко запустить сервер мониторинга на своем ноутбуке и "дергать" сервисы для отладки.</p>
+</li>
+<li>
+<p>Не нужно заботиться о том, куда приложению отправлять метрики; оно просто предоставляет endpoint.</p>
+</li>
+<li>
+<p>Легко понять, "мертв" ли target (Prometheus не может до него достучаться).</p>
+</li>
+</ul>
+<h4 id="b"><strong>b) Многомерная модель данных</strong><a class="headerlink" href="#b" title="Permanent link">&para;</a></h4>
+<p>Метрики в Prometheus — это не просто <code>cpu_usage = 45%</code>. Это наборы пар ключ-значение (labels), что делает данные невероятно гибкими.</p>
+<p>Пример метрики:</p>
+<p>text</p>
+<p><code>http_requests_total{method="POST", handler="/api/users", status="200", instance="10.0.0.1:8080"} 1500</code></p>
+<p>Здесь:</p>
+<ul>
+<li><code>http_requests_total</code> — имя метрики.</li>
+<li><code>method</code>, <code>handler</code>, <code>status</code>, <code>instance</code> — <strong>лейблы</strong> (labels). Они описывают измерение.</li>
+<li><code>1500</code> — значение.</li>
+</ul>
+<p>Благодаря лейблам можно делать запросы типа:</p>
+<ul>
+<li>"Покажи все запросы к <code>/api/users</code>"</li>
+<li>"Покажи все ошибки 500 на всех инстансах"</li>
+<li>"Сравни количество GET и POST запросов"</li>
+</ul>
+<p>Это невероятно мощный инструмент для анализа.</p>
+<h3 id="13">1.3. Ключевые компоненты, которые нужно знать<a class="headerlink" href="#13" title="Permanent link">&para;</a></h3>
+<p>Вся экосистема Prometheus состоит из нескольких частей:</p>
+<ol>
+<li>
+<p><strong>Prometheus Server:</strong> Само ядро. Занимается сбором (scraping) и хранением метрик.
+    В свою очередь Сервер включает в себя:</p>
+<ul>
+<li>
+<p><strong>Хранилище</strong>, которое собирает метрики</p>
+</li>
+<li>
+<p><strong>HTTP Server</strong>, поддерживающий PromQL запросы, web-UI, отображает графану.</p>
+</li>
+<li>
+<p><strong>Retrieval</strong> - сервис по сбору метрик, который ходит по конечным точкам и собирает метрики, помещая их затем в хранилище</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Client Libraries:</strong> Библиотеки для разных языков программирования (Go, Java, Python, Ruby и др.), которые встраиваются в код вашего приложения для сбора и предоставления метрик. Ваше приложение должно предоставлять endpoint (обычно <code>/metrics</code>), откуда Prometheus будет забирать данные.</p>
+</li>
+<li>
+<p><strong>Exporters:</strong> Отдельные приложения, которые нужны, чтобы мониторить системы, которые сами не отдают метрики в формате Prometheus. Например:</p>
+<ul>
+<li>
+<p><strong>Node Exporter:</strong> для мониторинга аппаратного обеспечения и ОС (Linux, Windows).</p>
+</li>
+<li>
+<p><strong>cAdvisor / Docker Exporter:</strong> для мониторинга контейнеров.</p>
+</li>
+<li>
+<p><strong>Blackbox Exporter:</strong> для мониторинга доступности сайтов, портов (HTTP, TCP, ICMP).</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Pushgateway:</strong> Особый компонент для кратковременных задач (cron jobs), которые не живут долго и не могут ждать, пока их "выдернут". Они отправляют (push) свои метрики в Pushgateway, а Prometheus уже забирает их оттуда.</p>
+</li>
+<li>
+<p><strong>Alertmanager:</strong> Отдельный сервис, который обрабатывает оповещения от Prometheus Server, группирует их, убирает дубли и отправляет по нужным каналам (Slack, email и т.д.).</p>
+</li>
+<li>
+<p><strong>Grafana:</strong> Не является частью Prometheus, но это лучший друг. Используется для создания красивых и информативных дашбордов на основе данных из Prometheus.</p>
+</li>
+</ol>
+<h1 id="2-prometheus">2. Практика (чистый prometheus)<a class="headerlink" href="#2-prometheus" title="Permanent link">&para;</a></h1>
+<p>https://www.youtube.com/playlist?list=PLg5SS_4L6LYu6qjwwwjt2WRsEudkzqB7J</p>
+<h2 id="21">2.1. Подготовка и активация<a class="headerlink" href="#21" title="Permanent link">&para;</a></h2>
+<p>1) Устанавливаем Priometheus на ubuntu:
+    <code>wget &lt;ссылка на архив с нужной версией .tar.gz&gt;</code></p>
+<p>2) Распаковываем архив:
+     <code>tar xvfz archive.tar.gz</code></p>
+<p>3) В распакованном архиве можно удалить файлы LICENSE, NOTICE. 
+     <code>rm LICENSE</code>
+     <code>rm NOTICE</code></p>
+<p>4) Откроем и отредактируем через nano файл <code>prometheus.yml</code> . Можно подчистить все комментарии-подсказки и оставить необходимое:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># интервал сбора данных</span>
+<span class="nt">global</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">scrape_interval</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15s</span>
+
+<span class="nt">scrape_configs</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;myprometheus&quot;</span>
+
+<span class="c1"># ui с данными. сюда же добавляется рабочий ip для отслеживания.</span>
+<span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;localhost:9090&quot;</span><span class="p p-Indicator">]</span>
+<span class="w">            </span><span class="c1"># - localhost:9090</span>
+<span class="w">            </span><span class="c1"># - 10.10.0.1.:9090</span>
+</code></pre></div>
+<p>5) Активируем Prometheus:
+     <code>./prometheus</code></p>
+<p>Видим много букв. На порте 9090 видим web-ui с данными, пока не прервём процесс ctrl + C.
+Параллельно с этим в нашей рабочей директории создается папка с БД <code>/data</code>. Все метрики сохраняются там.</p>
+<h2 id="22-">2.2. Переделываем по-взрослому: автозапуск<a class="headerlink" href="#22-" title="Permanent link">&para;</a></h2>
+<p>В реальности необходимо держать prometheus в рабочем состоянии постоянно или хотя бы запускать его одновременно с запуском машины. 
+Хранение данных тоже должно находиться в специализированном месте.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>su
+
+<span class="c1"># Переносим бинарник prometheus*. После этого prometheus можно будет запускать из любой директории:</span>
+mv<span class="w"> </span>prometheus<span class="w"> </span>/usr/bin
+
+<span class="c1"># Создаем директорию для данных</span>
+mkdir<span class="w"> </span>/etc/prometheus/data
+
+<span class="c1"># Переносим prometheus.yml в созданную директорию (или в другую по надобности):</span>
+mv<span class="w"> </span>/etc/prometheus
+
+<span class="c1"># Можно удалить папку /prometheus из корневой директории</span>
+rm<span class="w"> </span>-rf<span class="w"> </span>/prometheus
+
+<span class="c1"># Добавляем системного юзера prometheus и передаем в его владение бинарник prometheus:</span>
+useradd<span class="w"> </span>-rs<span class="w"> </span>/bin/false<span class="w"> </span>prometheus
+chown<span class="w"> </span>prometheus:prometheus<span class="w"> </span>/usr/bin/prometheus
+chown<span class="w"> </span>-R<span class="w"> </span>prometheus:prometheus<span class="w"> </span>/etc/prometheus
+</code></pre></div>
+<p>А теперь самое главное: создаем из бинарника СЕРВИС, чтобы он запускался при запуске машины. Для этого создаем файл:
+<code>nano etc/systemd/system/prometheus.service</code></p>
+<p>Его содержимое:</p>
+<div class="highlight"><pre><span></span><code>[Unit]
+Description=Prometheus Server
+After=network.target
+
+[Service]
+User=prometheus
+Group=prometheus
+Type=simple
+Restart=on-failure
+ExecStart=/usr/bin/prometheus \
+    --config.file        /etc/prometheus/prometheus.yml \
+    --storage.tsdb.path  /etc/prometheus/data
+
+[Install]
+WantedBy=multi-user.target
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Теперь делаем reload и стартуем сервис:</span>
+systemctl<span class="w"> </span>daemon-reload
+systemctl<span class="w"> </span>start
+
+<span class="c1"># Проверяем работает ли наш сервис:</span>
+systemctl<span class="w"> </span>status<span class="w"> </span>prometheus
+
+<span class="c1"># Делаем запуск сервиса автоматическим при запуске машины:</span>
+systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>prometheus
+</code></pre></div>
+<p>Полный готовый скрипт можно скачать из гитхаба adv-it.</p>
+<h1 id="3-prometheus-operator-helm">3. Установка Prometheus Operator в облачный кластер через HELM.<a class="headerlink" href="#3-prometheus-operator-helm" title="Permanent link">&para;</a></h1>
+<p>По традиции для разворачивания мониторинга через прометеус можно собрать вместе все <em>.yaml</em> декларации для каждого компонента и разворачивать их в нужной последовательности, что неудобно.</p>
+<p>Вместо этого можно использовать <strong>Operator</strong>, который в сути своей является менеджером компонентов прометеуса. Он управляет порядком запуска. Достаточно будет найти подходящий оператор и развернуть его в кластере.</p>
+<p>Но наиболее эффективным методом является использование <strong>HELM-чарта</strong>, который в свою очередь введёт в действие подходящий оператор. То есть, HELM формирует сетап, а оператор им управляет. Мы будем использовать версию comunity.</p>
+<p>Репозиторий:
+https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack#kube-prometheus-stack</p>
+<p>// Устанавливаем чарт Prometheus-comunity в кластер:</p>
+<div class="highlight"><pre><span></span><code>tiv@DESKTOP-0A8EL6K:~$<span class="w"> </span>helm<span class="w"> </span>install<span class="w"> </span>moe-release<span class="w"> </span>oci://ghcr.io/prometheus-community/charts/kube-prometheus-stack
+
+<span class="c1"># (moe-release - имя релиза, которое хотим)</span>
+<span class="c1"># Вывод команды:</span>
+
+Pulled:<span class="w"> </span>ghcr.io/prometheus-community/charts/kube-prometheus-stack:77.9.1
+Digest:<span class="w"> </span>sha256:508745ffc3470483396e1639189443325cfb291ade3fb4987c08accbdabc0710
+NAME:<span class="w"> </span>moe-release
+LAST<span class="w"> </span>DEPLOYED:<span class="w"> </span>Fri<span class="w"> </span>Sep<span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="m">17</span>:33:41<span class="w"> </span><span class="m">2025</span>
+NAMESPACE:<span class="w"> </span>default
+STATUS:<span class="w"> </span>deployed
+REVISION:<span class="w"> </span><span class="m">1</span>
+NOTES:
+kube-prometheus-stack<span class="w"> </span>has<span class="w"> </span>been<span class="w"> </span>installed.<span class="w"> </span>Check<span class="w"> </span>its<span class="w"> </span>status<span class="w"> </span>by<span class="w"> </span>running:
+<span class="w">  </span>kubectl<span class="w"> </span>--namespace<span class="w"> </span>default<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-l<span class="w"> </span><span class="s2">&quot;release=moe-release&quot;</span>
+
+Get<span class="w"> </span>Grafana<span class="w"> </span><span class="s1">&#39;admin&#39;</span><span class="w"> </span>user<span class="w"> </span>password<span class="w"> </span>by<span class="w"> </span>running:
+
+<span class="w">  </span>kubectl<span class="w"> </span>--namespace<span class="w"> </span>default<span class="w"> </span>get<span class="w"> </span>secrets<span class="w"> </span>moe-release-grafana<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.admin-password}&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span>
+
+Access<span class="w"> </span>Grafana<span class="w"> </span><span class="nb">local</span><span class="w"> </span>instance:
+
+<span class="w">  </span><span class="nb">export</span><span class="w"> </span><span class="nv">POD_NAME</span><span class="o">=</span><span class="k">$(</span>kubectl<span class="w"> </span>--namespace<span class="w"> </span>default<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>-l<span class="w"> </span><span class="s2">&quot;app.kubernetes.io/name=grafana,app.kubernetes.io/instance=moe-release&quot;</span><span class="w"> </span>-oname<span class="k">)</span>
+<span class="w">  </span>kubectl<span class="w"> </span>--namespace<span class="w"> </span>default<span class="w"> </span>port-forward<span class="w"> </span><span class="nv">$POD_NAME</span><span class="w"> </span><span class="m">3000</span>
+
+Visit<span class="w"> </span>https://github.com/prometheus-operator/kube-prometheus<span class="w"> </span><span class="k">for</span><span class="w"> </span>instructions<span class="w"> </span>on<span class="w"> </span>how<span class="w"> </span>to<span class="w"> </span>create<span class="w"> </span><span class="p">&amp;</span><span class="w"> </span>configure<span class="w"> </span>Alertmanager<span class="w"> </span>and<span class="w"> </span>Prometheus<span class="w"> </span>instances<span class="w"> </span>using<span class="w"> </span>the<span class="w"> </span>Operator.
+</code></pre></div>
+<p>Здесь разработчики уже предлагают проверить командой успешную установку. Видим, что логин от графаны: <strong>admin</strong>. Пароль можно получить командами ниже: <code>kubectl...kubectl...export...kubectl...</code> 
+В общем делаем всё по инструкции из терминала. Port-forward переводит <em>Grafana</em> на <em>localhost:3000</em>.
+Выполняем:</p>
+<div class="highlight"><pre><span></span><code>tiv@DESKTOP-0A8EL6K:~$<span class="w"> </span>kubectl<span class="w"> </span>--namespace<span class="w"> </span>default<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-l<span class="w"> </span><span class="s2">&quot;release=moe-release&quot;</span>
+
+NAME<span class="w">                                                   </span>READY<span class="w">   </span>STATUS<span class="w">    </span>RESTARTS<span class="w">   </span>AGE
+moe-release-kube-prometheu-operator-57b44c7bcc-xk7dc<span class="w">   </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>26s
+moe-release-kube-state-metrics-669f47f9bd-hz2p7<span class="w">        </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>26s
+moe-release-prometheus-node-exporter-2fvb5<span class="w">             </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>26s
+moe-release-prometheus-node-exporter-mcd78<span class="w">             </span><span class="m">1</span>/1<span class="w">     </span>Running<span class="w">   </span><span class="m">0</span><span class="w">          </span>26s
+
+tiv@DESKTOP-0A8EL6K:~$<span class="w"> </span>kubectl<span class="w"> </span>--namespace<span class="w"> </span>default<span class="w"> </span>get<span class="w"> </span>secrets<span class="w"> </span>moe-release-grafana<span class="w"> </span>-o<span class="w"> </span><span class="nv">jsonpath</span><span class="o">=</span><span class="s2">&quot;{.data.admin-password}&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span>
+prom-operator
+
+tiv@DESKTOP-0A8EL6K:~$<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">POD_NAME</span><span class="o">=</span><span class="k">$(</span>kubectl<span class="w"> </span>--namespace<span class="w"> </span>default<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>-l<span class="w"> </span><span class="s2">&quot;app.kubernetes.io/name=grafana,app.kubernetes.io/instance=moe-release&quot;</span><span class="w"> </span>-oname<span class="k">)</span>
+
+tiv@DESKTOP-0A8EL6K:~$<span class="w"> </span>kubectl<span class="w"> </span>--namespace<span class="w"> </span>default<span class="w"> </span>port-forward<span class="w"> </span><span class="nv">$POD_NAME</span><span class="w"> </span><span class="m">3000</span>
+Forwarding<span class="w"> </span>from<span class="w"> </span><span class="m">127</span>.0.0.1:3000<span class="w"> </span>-&gt;<span class="w"> </span><span class="m">3000</span>
+Forwarding<span class="w"> </span>from<span class="w"> </span><span class="o">[</span>::1<span class="o">]</span>:3000<span class="w"> </span>-&gt;<span class="w"> </span><span class="m">3000</span>
+Handling<span class="w"> </span>connection<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="m">3000</span>
+</code></pre></div>
+<p>До прерывания ctrl + C на 3000 порте localhost будет доступен UI графаны. 
+<strong>Великолепно!</strong></p>
+<hr />
+<h2 id="port-forwarding">Упражнение: port-forwarding<a class="headerlink" href="#port-forwarding" title="Permanent link">&para;</a></h2>
+<p>Переведём и другие сервисы на какие-либо порты.</p>
+<p><strong>Общий синтаксис команды</strong>: </p>
+<p><code>kubectl port-forward [resource-type]/[resource-name] [local-port]:[resource-port]</code></p>
+<p><strong>Объяснение</strong>:</p>
+<ul>
+<li>resource-type — тип ресурса (например, pod, svc).</li>
+<li>resource-name — имя ресурса.</li>
+<li>local-port — локальный порт на компьютере.</li>
+<li>resource-port — порт на ресурсе Kubernetes.
+Можно одновременно через пробел добавить дополнительную пару портов.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="c1"># смотрим названия сервисов и их порты</span>
+tiv@DESKTOP-0A8EL6K:~$<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>services
+
+NAME<span class="w">                                      </span>TYPE<span class="w">        </span>CLUSTER-IP<span class="w">      </span>EXTERNAL-IP<span class="w">   </span>PORT<span class="o">(</span>S<span class="o">)</span><span class="w">                      </span>AGE
+alertmanager-operated<span class="w">                     </span>ClusterIP<span class="w">   </span>None<span class="w">            </span>&lt;none&gt;<span class="w">        </span><span class="m">9093</span>/TCP,9094/TCP,9094/UDP<span class="w">   </span>19m
+kubernetes<span class="w">                                </span>ClusterIP<span class="w">   </span><span class="m">10</span>.96.128.1<span class="w">     </span>&lt;none&gt;<span class="w">        </span><span class="m">443</span>/TCP<span class="w">                      </span>40m
+moe-release-grafana<span class="w">                       </span>ClusterIP<span class="w">   </span><span class="m">10</span>.96.157.175<span class="w">   </span>&lt;none&gt;<span class="w">        </span><span class="m">80</span>/TCP<span class="w">                       </span>19m
+moe-release-kube-prometheu-alertmanager<span class="w">   </span>ClusterIP<span class="w">   </span><span class="m">10</span>.96.214.51<span class="w">    </span>&lt;none&gt;<span class="w">        </span><span class="m">9093</span>/TCP,8080/TCP<span class="w">            </span>19m
+moe-release-kube-prometheu-operator<span class="w">       </span>ClusterIP<span class="w">   </span><span class="m">10</span>.96.206.68<span class="w">    </span>&lt;none&gt;<span class="w">        </span><span class="m">443</span>/TCP<span class="w">                      </span>19m
+moe-release-kube-prometheu-prometheus<span class="w">     </span>ClusterIP<span class="w">   </span><span class="m">10</span>.96.151.16<span class="w">    </span>&lt;none&gt;<span class="w">        </span><span class="m">9090</span>/TCP,8080/TCP<span class="w">            </span>19m
+moe-release-kube-state-metrics<span class="w">            </span>ClusterIP<span class="w">   </span><span class="m">10</span>.96.137.236<span class="w">   </span>&lt;none&gt;<span class="w">        </span><span class="m">8080</span>/TCP<span class="w">                     </span>19m
+moe-release-prometheus-node-exporter<span class="w">      </span>ClusterIP<span class="w">   </span><span class="m">10</span>.96.137.177<span class="w">   </span>&lt;none&gt;<span class="w">        </span><span class="m">9100</span>/TCP<span class="w">                     </span>19m
+prometheus-operated<span class="w">                       </span>ClusterIP<span class="w">   </span>None<span class="w">            </span>&lt;none&gt;<span class="w">        </span><span class="m">9090</span>/TCP<span class="w">                     </span>19m
+
+<span class="c1"># prometheus</span>
+tiv@DESKTOP-0A8EL6K:~$<span class="w"> </span>kubectl<span class="w"> </span>port-forward<span class="w"> </span>svc/moe-release-kube-prometheu-prometheus<span class="w"> </span><span class="m">9999</span>:9090
+Forwarding<span class="w"> </span>from<span class="w"> </span><span class="m">127</span>.0.0.1:9999<span class="w"> </span>-&gt;<span class="w"> </span><span class="m">9090</span>
+Forwarding<span class="w"> </span>from<span class="w"> </span><span class="o">[</span>::1<span class="o">]</span>:9999<span class="w"> </span>-&gt;<span class="w"> </span><span class="m">9090</span>
+Handling<span class="w"> </span>connection<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="m">9999</span>
+
+<span class="c1"># alertmanager</span>
+tiv@DESKTOP-0A8EL6K:~$<span class="w"> </span>kubectl<span class="w"> </span>port-forward<span class="w"> </span>svc/moe-release-kube-prometheu-alertmanager<span class="w"> </span><span class="m">9093</span>:9093
+Forwarding<span class="w"> </span>from<span class="w"> </span><span class="m">127</span>.0.0.1:9093<span class="w"> </span>-&gt;<span class="w"> </span><span class="m">9093</span>
+Forwarding<span class="w"> </span>from<span class="w"> </span><span class="o">[</span>::1<span class="o">]</span>:9093<span class="w"> </span>-&gt;<span class="w"> </span><span class="m">9093</span>
+Handling<span class="w"> </span>connection<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="m">9093</span>
+</code></pre></div>
+<hr />
+<p>Применить изменения к чарту в кластере: ???
+<code>helm install update tivzrelease -f values.yaml</code></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://zkote47.github.io/smnvs" target="_blank" rel="noopener" title="zkote47.github.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://t.me/socsichka" target="_blank" rel="noopener" title="t.me" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M256 8a248 248 0 1 0 0 496 248 248 0 1 0 0-496m115 168.7c-3.7 39.2-19.9 134.4-28.1 178.3-3.5 18.6-10.3 24.8-16.9 25.4-14.4 1.3-25.3-9.5-39.3-18.7-21.8-14.3-34.2-23.2-55.3-37.2-24.5-16.1-8.6-25 5.3-39.5 3.7-3.8 67.1-61.5 68.3-66.7.2-.7.3-3.1-1.2-4.4s-3.6-.8-5.1-.5c-2.2.5-37.1 23.5-104.6 69.1-9.9 6.8-18.9 10.1-26.9 9.9-8.9-.2-25.9-5-38.6-9.1-15.5-5-27.9-7.7-26.8-16.3.6-4.5 6.7-9 18.4-13.7 72.3-31.5 120.5-52.3 144.6-62.3 68.9-28.6 83.2-33.6 92.5-33.8 2.1 0 6.6.5 9.6 2.9 2 1.7 3.2 4.1 3.5 6.7.5 3.2.6 6.5.4 9.8z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.path", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>

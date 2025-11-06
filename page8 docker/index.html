@@ -1,0 +1,1215 @@
+
+<!doctype html>
+<html lang="ru" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Персональная база знаний моего DevOps-становления">
+      
+      
+        <meta name="author" content="zkote_47">
+      
+      
+        <link rel="canonical" href="https://zkote47.github.io/smnvs/page8%20docker/">
+      
+      
+        <link rel="prev" href="../page7%20cicd/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/catlogo.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.23">
+    
+    
+      
+        <title>Docker - TIV</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.84d31ad4.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#docker" class="md-skip">
+          Перейти к содержанию
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Верхний колонтитул">
+    <a href=".." title="TIV" class="md-header__button md-logo" aria-label="TIV" data-md-component="logo">
+      
+  <img src="../assets/images/catlogo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            TIV
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Docker
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Тёмная тема"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Тёмная тема" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="blue"  aria-label="Светлая тема"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Светлая тема" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Поиск" placeholder="Поиск" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Поиск">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Очистить" aria-label="Очистить" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Инициализация поиска
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://zkote47.github.io/smnvs" title="Перейти к репозиторию" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zkote_47/smnvs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Вкладки" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  zkote`s notes
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../4k8s/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Kubernetes
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../page1%20git%2Bgithub/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Git + GitHub
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../page2/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Методы HTTP
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../page3/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Helm
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../page4%20ssh/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  ssh и Yandex-cloud
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../page5%20Prometheus/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Prometheus
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../page6%20Lens/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Lens
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../page7%20cicd/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  CI-CD
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Docker
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Навигация" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="TIV" class="md-nav__button md-logo" aria-label="TIV" data-md-component="logo">
+      
+  <img src="../assets/images/catlogo.svg" alt="logo">
+
+    </a>
+    TIV
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://zkote47.github.io/smnvs" title="Перейти к репозиторию" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    zkote_47/smnvs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    zkote`s notes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4k8s/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Kubernetes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page1%20git%2Bgithub/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Git + GitHub
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Методы HTTP
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Helm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page4%20ssh/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ssh и Yandex-cloud
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page5%20Prometheus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prometheus
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page6%20Lens/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Lens
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../page7%20cicd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    CI-CD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Docker
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1. Контейнеризация и ВМ
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2. Основные понятия
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3. Dockerfile. Стандартный вид.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4. Основные команды.
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.4. Основные команды.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Команды build и run.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-volumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5. Volumes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docker compose
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Содержание">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Содержание
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#51" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.1. Контейнеризация и ВМ
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#52" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.2. Основные понятия
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#53-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.3. Dockerfile. Стандартный вид.
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#54" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.4. Основные команды.
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5.4. Основные команды.">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#build-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      Команды build и run.
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#55-volumes" class="md-nav__link">
+    <span class="md-ellipsis">
+      5.5. Volumes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      Docker compose
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="docker">Docker<a class="headerlink" href="#docker" title="Permanent link">&para;</a></h1>
+<ul>
+<li>
+<p><strong>Концепция:</strong> Что такое контейнер, чем отличается от виртуальной машины (изоляция процессов vs изоляция всей ОС).</p>
+</li>
+<li>
+<p><strong>Основные понятия</strong> Docker + Docker Compose</p>
+</li>
+<li>
+<p><strong>Dockerfile:</strong> Уверенное чтение и написание. Понимание и умение использовать ключевые инструкции:</p>
+</li>
+<li>
+<p><strong>Основные команды:</strong> <code>docker build</code>, <code>docker run</code> (с ключами <code>-d</code>, <code>-p</code>, <code>-v</code>, <code>-e</code>), <code>docker ps</code>, <code>docker images</code>, <code>docker logs</code>.</p>
+</li>
+<li>
+<p><strong>Docker Volumes:</strong> Зачем нужны (для сохранения данных и конфигов). Как примонтировать том к контейнеру.</p>
+</li>
+</ul>
+<h2 id="51">5.1. Контейнеризация и ВМ<a class="headerlink" href="#51" title="Permanent link">&para;</a></h2>
+<p><strong>Виртуальная машина</strong> - это изолированная программа, которая эмулирует физический компьютер со своим ядром, процессором, памятью, интерфейсами. 
+Она располагается на физической машине (хост) и является гостем (guest machine).</p>
+<p><strong>Контейнер</strong> - изолированная среда приложения, которая использует не собственное ядро, а ядро машины, на которой располагается. 
+Условно говоря, контейнер - это очень облегчённая версия ВМ.</p>
+<p><img alt="" src="../img/page8-1.png" /></p>
+<h2 id="52">5.2. Основные понятия<a class="headerlink" href="#52" title="Permanent link">&para;</a></h2>
+<p><strong>Образ контейнера (image)</strong> - шаблон, на основе которого создаются контейнеры. Образ содержит инструкции о том, какие файлы и программы должны быть включены в контейнер, а также команды для их настройки.</p>
+<p><strong>Регистрация образов</strong> - централизованное хранилище для хранения и распространения образов контейнеров. Например, Docker Hub — официальный репозиторий Docker.</p>
+<p><strong>Dockerfile</strong> - файл, содержащий инструкции для создания образа контейнера. В нем указаны шаги сборки, такие как установка пакетов, копирование файлов и запуск команд.</p>
+<p><strong>docker-compose.yml</strong> - манифест, в котором устанавливается взаимосвязь нескольких образов и их зависимости друг от друга.</p>
+<p><strong>Тома (volumes)</strong> - это специализированные директории на диске, которые монтируются внутри контейнера. Позволяют сохранять данные после перезапуска контейнера. </p>
+<p>То есть, данные сохраняются локально, а потом при разворачивании контейнера копируются в него.</p>
+<p><img alt="" src="../img/page8-2.png" /></p>
+<h2 id="53-dockerfile">5.3. Dockerfile. Стандартный вид.<a class="headerlink" href="#53-dockerfile" title="Permanent link">&para;</a></h2>
+<p><strong>Dockerfile</strong> пишется внутри рабочей директории (обычно). Пишется без расширений, просто Dockerfile. </p>
+<p>Если хотим назвать файл не Dockerfile, а как-то по-другому, то используем флаг <code>-f</code> и указываем актуальное имя. </p>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="o">(</span>базовый<span class="w"> </span>образ<span class="o">)</span>
+<span class="k">RUN</span><span class="w"> </span><span class="o">(</span>выполнить<span class="w"> </span>команду<span class="w"> </span>при<span class="w"> </span>сборке<span class="o">)</span>
+<span class="k">COPY</span><span class="w"> </span>/<span class="w"> </span>ADD<span class="w"> </span><span class="o">(</span>скопировать<span class="w"> </span>файлы<span class="w"> </span>в<span class="w"> </span>образ<span class="o">)</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">(рабочая директория)</span>
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">(какой порт открывает приложение)</span>
+<span class="k">ENV</span><span class="w"> </span><span class="o">(</span>переменные<span class="w"> </span>окружения<span class="o">)</span>
+<span class="k">CMD</span><span class="w"> </span>и<span class="w"> </span>ENTRYPOINT<span class="w"> </span>
+</code></pre></div>
+<p>Пример Dockerfile:
+<div class="highlight"><pre><span></span><code><span class="c"># используем образ, на базе которого строится контейнер. Желательно лёгкие</span>
+<span class="k">FROM</span><span class="w"> </span><span class="s">python:3.12</span>
+
+<span class="c"># создаём рабочую директорию внутри контейнера</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+
+<span class="c"># первый раз COPY копирует в текущую директорию данные, которые редко меняются. в последующие разы данные будут браться из кэша, что сильно ускоряет запуск контейнера. поэтому COPY выполняется в 2 этапа</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>./
+
+<span class="c"># запуск установки зависимости. используется по сути 1 раз, в следующие разы берет эти же данные из кэша.</span>
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c"># копируем данные, которые меняются часто. в нашем случае код.</span>
+<span class="k">COPY</span><span class="w"> </span>hello_flask.py<span class="w"> </span>./
+
+<span class="c"># порт на локалхосте, на котором можно увидеть результат наших стараний </span>
+<span class="k">EXPOSE</span><span class="w"> </span><span class="s">5000</span>
+
+<span class="c"># CMD - по сути маленький терминал, но чтобы каждый раз не писать команду в реальный терминал, то вписываем её в файл. Автоматизация :)</span>
+<span class="c"># структура команды: CMD [&quot;executor&quot;, &quot;param1&quot;, &quot;param2&quot;]</span>
+<span class="c"># например: CMD [&quot;echo&quot;, &quot;kek&quot;]</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;hello_flask.py&quot;</span><span class="p">]</span>
+</code></pre></div></p>
+<blockquote>
+<p>CMD и ENTRYPOINT (какая команда запускается при старте контейнера) - очень важный момент! </p>
+</blockquote>
+<p>Есть ещё ENTRYPOINT, который фиксирует <em>executor</em> для cmd и терминала:</p>
+<div class="highlight"><pre><span></span><code><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="err">execu</span><span class="kc">t</span><span class="err">or</span><span class="p">]</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="err">param</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="err">param</span><span class="mi">2</span><span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;node&quot;</span><span class="p">]</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;index.js&quot;</span><span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.9-alpine</span>
+<span class="k">ENTRYPOINT</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;app.py&quot;</span><span class="p">]</span>
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;--host&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;0.0.0.0&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--port&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;8000&quot;</span><span class="p">]</span>
+</code></pre></div>
+<h2 id="54">5.4. Основные команды.<a class="headerlink" href="#54" title="Permanent link">&para;</a></h2>
+<p><code>docker ps</code> - просмотр бегущих контейнеров контейнеров и их данных
+<code>docker ps -a</code> - просмотр всех контейнеров
+<code>docker images</code> - просмотр построенных образов. Не забываем их чистить, много места едят
+<code>docker search &lt;что ищем&gt;</code> - поиск по докерхабу (но можно и через браузер)
+<code>docker pull &lt;что ищем&gt;</code> - стягиваем с докерхаба
+<code>docker play &lt;что ищем&gt;</code> - стягиваем с докерхаба и запускаем
+<code>docker tag &lt;old-name&gt; &lt;new-name&gt;</code> - переименование образа
+<code>docker logs &lt;container_id&gt;</code> - логи контейнера
+<code>docker rm &lt;container_id&gt;</code> - удаление контейнера
+<code>docker rmi &lt;image-name&gt; (rmi – remove image)</code> - удаление образа или image rm.
+Для удаления образа нужно сначала удалить контейнер, который его использует.</p>
+<p>====================================
+   Пуш образа в DockerHub:</p>
+<p><code>docker push имя-в-DockerHub/image-name:version</code>
+или
+<code>docker push имя-в-DockerHub/image-teg:version</code></p>
+<p>====================================</p>
+<h3 id="build-run">Команды build и run.<a class="headerlink" href="#build-run" title="Permanent link">&para;</a></h3>
+<p>Данные команды обладают различными полезными опциями.</p>
+<ul>
+<li>BUILD
+<code>docker build</code> - построение образа</li>
+</ul>
+<p><code>docker build -t image-name:v1 . -d</code> 
+(имя образа маленькими буквами!)
+<code>.</code> – поиск шаблона образа в текущей папке; 
+<code>-t</code> - тег, обычно тут пишут версию образа
+<code>-d</code> - выполнить в фоновом режиме. Снижает вероятность ошибок</p>
+<ul>
+<li>RUN</li>
+</ul>
+<p><code>docker run</code> - запуск образа (для примера возьмём <em>tomcat</em>)</p>
+<div class="highlight"><pre><span></span><code>`docker run -it -p 1234:8080 tomcat`
+</code></pre></div>
+<p><code>it</code> – интерактивно, 
+<code>p</code> – перенаправление
+портов на <code>1234</code> c <code>8080</code> образа <code>tomcat</code>
+После этой команды много букв – контейнер запущен. Прервать ctrl + C.</p>
+<div class="highlight"><pre><span></span><code>`docker run -d -p 1234:8080 tomcat`
+</code></pre></div>
+<p><code>-d</code> - в фоновом режиме, рекомендуется</p>
+<p>Специфичный IP:
+    <code>docker run -d -p 127.0.0.1:8080:80 nginx</code></p>
+<p>Важно отметить: 8080 - это желаемый порт, а 80 это стандартный порт в контейнере.
+То есть мы перебрасываем на желаемый порт на локальной машине с порта из контейнера.</p>
+<p><strong>Теперь рассмотрим флаги -v и -e</strong></p>
+<p><code>-v</code> (volume) — Монтирование томов и директорий. Монтирует директорию или том из хостовой системы в контейнер.</p>
+<p><code>-v /ПУТЬ/НА/ХОСТЕ:/ПУТЬ/В/КОНТЕЙНЕРЕ</code></p>
+<p><code>docker run -v my_volume:/app/data nginx</code>  - cоздание тома
+<code>docker run -v ./nginx.conf:/etc/nginx/nginx.conf -p 80:80 nginx</code></p>
+<p><code>-e</code> (enviroment) -устанавливает переменные окружения внутри контейнера.</p>
+<p><code>-e ПЕРЕМЕННАЯ=ЗНАЧЕНИЕ</code>
+<code>docker run -e DEBUG=true my-app</code></p>
+<p>Конфигурация базы данных:</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">POSTGRES_DB</span><span class="o">=</span>mydb<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">POSTGRES_USER</span><span class="o">=</span>admin<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-e<span class="w"> </span><span class="nv">POSTGRES_PASSWORD</span><span class="o">=</span>secret<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-p<span class="w"> </span><span class="m">5432</span>:5432<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>postgres
+</code></pre></div>
+<p>Резюмируя:
+ <strong><code>-d</code></strong> - запуск в фоновом режиме
+ <strong><code>-p</code></strong> - перенаправление портов
+ <strong><code>-v</code></strong> - для томов
+ <strong><code>-e</code></strong> - для переменных</p>
+<h2 id="55-volumes">5.5. Volumes<a class="headerlink" href="#55-volumes" title="Permanent link">&para;</a></h2>
+<p>Том создаётся командой <code>docker volume create</code>. Если имя не указано, Docker сгенерирует его автоматически. 
+<code>docker volume create my_volume</code></p>
+<p>Том монтируется к контейнеру с помощью опции <code>-v</code> 
+<code>docker run -d --name my_container -v my_volume:/app/data my_image</code>
+  
+  том <code>my_volume</code> подключается к пути <code>/app/data</code> внутри контейнера <code>my_container</code>.</p>
+<p><strong>Управление</strong>
+- <code>docker volume ls</code> — список томов;
+- <code>docker volume inspect</code> — подробности тома (путь на хосте и др.);
+- <code>docker volume rm</code> — удалить том (если он больше не используется контейнерами);
+- <code>docker volume prune</code> — удалить все тома, не привязанные к контейнерам (используется для очистки).</p>
+<h2 id="docker-compose">Docker compose<a class="headerlink" href="#docker-compose" title="Permanent link">&para;</a></h2>
+<p>Файл Docker Compose создаётся в той же папке проекта, имя файла
+обязательно: <strong>docker-compose.yml</strong>
+Здесь описываются различные образы. После написания (или копирования из документации) файла docker-compose запускается двумя командами:
+<code>docker-compose build</code>
+<code>docker-compose up -d</code></p>
+<p>или <code>docker-compose up --build</code></p>
+<p><strong>Пример с flask:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">FROM</span><span class="w"> </span><span class="s">python:3.11-slim-bullseye</span>
+<span class="k">WORKDIR</span><span class="w"> </span><span class="s">/usr/src/app</span>
+<span class="k">COPY</span><span class="w"> </span>requirements.txt<span class="w"> </span>./
+<span class="k">RUN</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--no-cache-dir<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+<span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;hello_flask.py&quot;</span><span class="p">]</span>
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code>Flask==2.3.3
+</code></pre></div>
+<p>docker-compose.yml:</p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="err"> </span><span class="w"> </span><span class="nt">flask-app</span><span class="p">:</span>
+<span class="err">   </span><span class="w"> </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span><span class="w">   </span><span class="c1"># сбилдить по Dockerfile из этой же директории</span>
+<span class="err">   </span><span class="w"> </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">flask-container</span>
+<span class="err">   </span><span class="w"> </span><span class="nt">ports</span><span class="p">:</span>
+<span class="err">     </span><span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;5000:5000&quot;</span>
+</code></pre></div>
+<p>вводим и идём на localhost:5000
+<code>docker-compose up --build</code></p>
+<p>А вот пример docker-compose.yaml с django и postgresql.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">services</span><span class="p">:</span>
+<span class="err"> </span><span class="w"> </span><span class="nt">django</span><span class="p">:</span>
+<span class="err">   </span><span class="w"> </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.</span><span class="w">   </span>
+<span class="err">   </span><span class="w"> </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">django-container</span>
+<span class="err">   </span><span class="w"> </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python manage.py runserver 0.0.0.0:8000</span>
+<span class="err">   </span><span class="w"> </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="err">     </span><span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.:/usr/src/app</span>
+<span class="err">   </span><span class="w"> </span><span class="nt">ports</span><span class="p">:</span>
+<span class="err">     </span><span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8000:8000&quot;</span>
+<span class="err">   </span><span class="w"> </span><span class="nt">depends_on</span><span class="p">:</span>
+<span class="err">     </span><span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pgdb</span>
+
+<span class="err"> </span><span class="w"> </span><span class="nt">pgdb</span><span class="p">:</span>
+<span class="err">   </span><span class="w"> </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres</span>
+<span class="err">   </span><span class="w"> </span><span class="nt">environment</span><span class="p">:</span><span class="w"> </span><span class="err"> </span>
+<span class="err">     </span><span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">POSTGRES_DB=postgres</span><span class="w">        </span><span class="c1"># db name</span>
+<span class="err">     </span><span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">POSTGRES_USER=postgres</span><span class="w">      </span><span class="c1"># db login</span>
+<span class="err">     </span><span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">POSTGRES_PASSWORD=postgres</span><span class="w">  </span><span class="c1"># db password</span>
+<span class="err">   </span><span class="w"> </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pgdb</span>
+<span class="err">   </span><span class="w"> </span><span class="nt">volumes</span><span class="p">:</span>
+<span class="err">     </span><span class="w"> </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pgdbdata:/var/lib/postgresql/data </span><span class="err"> </span>
+
+<span class="nt">volumes</span><span class="p">:</span>
+<span class="err"> </span><span class="w"> </span><span class="nt">pgdbdata</span><span class="p">:</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code># build: постройка контейнера по Dockerfile из текущей папки (так как точка).
+# container_name: необязательная команда, задаёт имя контейнеру.
+# command: напишем команду, запускающую локальный сервер. В фреймворке
+джанго есть предустановленный локальный сервер, который будем запускать.
+manage.py – это специальный файл, к которому будем обращаться через питон и из этого файла уже вызывается та или иная команда. В нашем случае это команда runserver. И указываем порт.
+# volumes: указываем, что в текущем проекте берём текущую папку и соединянем это
+с папкой контейнера, путь которой указан под WORKDIR в Dockerfile. Таким образом указываем объединение папок.
+# depends_on: настройка указывает что данный сервис (в нашем случае django)
+зависит от другого указанного образа. То есть через сервис джанго мы обращаемся к
+сервису pgdb.
+# pgdb: Джанго всегда идёт с какой-нибудь базой данной, например postgreSQL.
+Назвали сокращённо pgdb (PosGres-db). Все детали какие образы подключать надо
+смотреть в документации проекта на докерхабе. Там подробно описаны все переменные
+окружения.
+# enviroment: перечисление необходимых переменных из документации postgreSQL.
+</code></pre></div>
+<p><em>docker-compose run django django-admin startproject project-name path-to-folder</em>
+<code>docker-compose run django django-admin startproject my-django .</code>
+(<strong>run</strong> используем вместо <strong>build</strong>, чтобы была возможность сюда же в команду дописать питоновских команд)</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://zkote47.github.io/smnvs" target="_blank" rel="noopener" title="zkote47.github.io" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://t.me/socsichka" target="_blank" rel="noopener" title="t.me" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M256 8a248 248 0 1 0 0 496 248 248 0 1 0 0-496m115 168.7c-3.7 39.2-19.9 134.4-28.1 178.3-3.5 18.6-10.3 24.8-16.9 25.4-14.4 1.3-25.3-9.5-39.3-18.7-21.8-14.3-34.2-23.2-55.3-37.2-24.5-16.1-8.6-25 5.3-39.5 3.7-3.8 67.1-61.5 68.3-66.7.2-.7.3-3.1-1.2-4.4s-3.6-.8-5.1-.5c-2.2.5-37.1 23.5-104.6 69.1-9.9 6.8-18.9 10.1-26.9 9.9-8.9-.2-25.9-5-38.6-9.1-15.5-5-27.9-7.7-26.8-16.3.6-4.5 6.7-9 18.4-13.7 72.3-31.5 120.5-52.3 144.6-62.3 68.9-28.6 83.2-33.6 92.5-33.8 2.1 0 6.6.5 9.6 2.9 2 1.7 3.2 4.1 3.5 6.7.5 3.2.6 6.5.4 9.8z"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.path", "search.highlight", "search.suggest", "content.code.copy", "content.action.edit"], "search": "../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "\u0421\u043a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u043d\u043e \u0432 \u0431\u0443\u0444\u0435\u0440", "clipboard.copy": "\u041a\u043e\u043f\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0432 \u0431\u0443\u0444\u0435\u0440", "search.result.more.one": "\u0415\u0449\u0451 1 \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.more.other": "\u0415\u0449\u0451 # \u043d\u0430 \u044d\u0442\u043e\u0439 \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0435", "search.result.none": "\u0421\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439 \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u043e", "search.result.one": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e 1 \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0435", "search.result.other": "\u041d\u0430\u0439\u0434\u0435\u043d\u043e \u0441\u043e\u0432\u043f\u0430\u0434\u0435\u043d\u0438\u0439: #", "search.result.placeholder": "\u041d\u0430\u0447\u043d\u0438\u0442\u0435 \u043f\u0435\u0447\u0430\u0442\u0430\u0442\u044c \u0434\u043b\u044f \u043f\u043e\u0438\u0441\u043a\u0430", "search.result.term.missing": "\u041e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442", "select.version": "\u0412\u044b\u0431\u0435\u0440\u0438\u0442\u0435 \u0432\u0435\u0440\u0441\u0438\u044e"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.f55a23d4.min.js"></script>
+      
+    
+  </body>
+</html>
